@@ -1,0 +1,12 @@
+[submodule "discovery"]
+	path = discovery
+	url = https://github.com/TwigCodes/discovery.git
+[submodule "twig-uaa"]
+	path = twig-uaa
+	url = https://github.com/TwigCodes/twig-uaa.git
+[submodule "api-cube"]
+	path = api-cube
+	url = https://github.com/TwigCodes/api-cube.git
+[submodule "gateway"]
+	path = gateway
+	url = https://github.com/TwigCodes/gateway.git
