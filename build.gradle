@@ -1,0 +1,68 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+        springCloudVersion = 'Finchley.SR1'
+        propDepsVersion = '0.0.9.RELEASE'
+        springFoxVersion = '2.9.2'
+        redissonVersion = '3.7.5'
+        javerVersion = '3.10.0'
+        jwtVersion = '0.9.0'
+        mongobeeVersion = '0.13'
+        problemVersion = '0.23.0'
+        javaTuplesVersion = '1.2'
+        jacksonDataTypeJsr310Version = '2.9.5'
+        jpushVersion = '3.3.7'
+        awsVersion = '1.11.136'
+        javassistVersion = '3.18.2-GA'
+        springbootAdminVersion = '2.0.2'
+        jPinyinVersion = '1.1.8'
+        embeddedRedisVersion = '0.6'
+        embeddedElasticsearchVersion = '2.4.2'
+    }
+    ext['spring.data.elasticsearch.version'] = '3.0.9.RELEASE'
+    ext['lombok.version'] = '1.18.2'
+    repositories {
+        mavenCentral()
+        maven { url('http://repo.spring.io/plugins-release') }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:propdeps-plugin:${propDepsVersion}")
+        classpath("org.springframework:springloaded:1.2.5.RELEASE")
+    }
+}
+
+allprojects {
+    group = 'com.twigcodes'
+    apply plugin: 'idea'
+}
+
+subprojects {
+    version = "0.0.1"
+    tasks.withType(Jar) {
+        baseName = "$project.name"
+    }
+    apply plugin: 'java'
+    apply from: '../gradle/docker.gradle'
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'io.spring.dependency-management'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url('https://repo.spring.io/libs-milestone') }
+    }
+    dependencies {
+        runtime('org.springframework.boot:spring-boot-devtools')
+        compileOnly("org.projectlombok:lombok")
+        compileOnly("org.springframework.boot:spring-boot-configuration-processor")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+    }
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}

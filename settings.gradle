@@ -1,0 +1,5 @@
+include 'discovery'
+include 'api-cube'
+include 'gateway'
+include 'twig-uaa'
+rootProject.name = 'twig-services'
